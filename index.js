@@ -4633,12 +4633,12 @@ app.get('/recoveryviewall', (req, res) => {
       console.log("Connected!");
 
       // First SQL query for staff
-      var sqlStaff = `SELECT profile, name, CONCAT(classes, '(', division,')') AS class_and_division, role, mobile_number, updated_at FROM tblstaff where (is_deleted = 1)`;
+      var sqlStaff = `SELECT profile, name, CONCAT(classes, '(', division,')') AS class_and_division, role, mobile_number, updated_at, id_number FROM tblstaff where (is_deleted = 1)`;
       con.query(sqlStaff, function (err, staffResult) {
         if (err) throw err;
 
         // Second SQL query for students and their parents
-        var sqlStudentsAndParents = `SELECT s.profile, s.name, CONCAT(s.classes, '(', s.division,')') AS class_and_division, s.role, p.mobile_number, s.updated_at 
+        var sqlStudentsAndParents = `SELECT s.profile, s.name, CONCAT(s.classes, '(', s.division,')') AS class_and_division, s.role, p.mobile_number, s.updated_at, s.id_number 
                                      FROM tblstudent s 
                                      INNER JOIN tblparent p ON s.id_number = p.id_number 
                                      WHERE s.is_deleted = 1`;
